@@ -4,105 +4,169 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<!--
+	SendCH-Telegram
+	By TiagoDanin
+-->
 <html>
 	<head>
 		<title>SendCH Telegram</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
 	<body>
 
-		<!-- Banner -->
-			<section id="banner">
-				<h2><strong>Send Post</strong> for your channel using markdown</h2>
-				<p>1. Add the bot (@MSGSendBot) for your channel</p>
-				<p>2. Edit and send the message with the form below</p>
-				<p>3. Remove the bot ;)</p>
-				<ul class="actions">
-					<li><a href="#two" class="button special">Get started</a></li>
-				</ul>
-			</section>
+		<!-- Home -->
+		<section id="banner">
+			<h2><strong>Send Post</strong> for your channel using Markdown or HTML</h2>
+			<p>1. Add the bot (@MSGSendBot) for your channel</p>
+			<p>2. Edit and send the message with the form below</p>
+			<p>3. Remove the bot ;)</p>
+			<ul class="actions">
+				<li><a href="#markdown" class="button special">Markdown</a></li>
+				<li><a href="#html" class="button special">HTML</a></li>
+			</ul>
+		</section>
 
+		<!-- Markdown -->
+		<section id="markdown" class="wrapper style2 special">
+			<div class="inner narrow">
+				<header>
+					<h2>Send Message</h2>
+				</header>
+				<form class="grid-form" action="https://api.telegram.org/bot[[YOU KEY]]/sendMessage" method="post">
 
-		<!-- One -->
-			<section id="two" class="wrapper style2 special">
-				<div class="inner narrow">
-					<header>
-						<h2>Send Message</h2>
-					</header>
-					<form class="grid-form" action="https://api.telegram.org/bot[[YOU KEY]]/sendMessage" method="post">
-						
-						<div class="form-control narrow">
-							<label for="name">Channel</label>
-							<input name="chat_id" value="@Channel" id="name" type="text">
-						</div>
-						<div class="form-control narrow">
-							<label for="email">Formatting options</label>
-							<a href="#one" class="button special">View</a>
-						</div>
+					<div class="form-control narrow">
+						<label for="name">Channel</label>
+						<input name="chat_id" value="@Channel" id="name" type="text">
+					</div>
+					<div class="form-control narrow">
+						<label for="email">Formatting options</label>
+						<a href="#one" class="button special">View</a>
+					</div>
 
-						<div class="form-control">
-							<label for="message">Message</label>
-							<textarea name="text" value="*Hi!*" id="message" rows="4"></textarea>
-						</div>
+					<div class="form-control">
+						<label for="message">Message</label>
+						<textarea name="text" value="*Hi!*" id="message" rows="4"></textarea>
+					</div>
 
-						<input type="hidden" name="isable_web_page_preview" value="true">
-						<input type="hidden" name="parse_mode" value="Markdown">
+					<input type="hidden" name="isable_web_page_preview" value="true">
+					<input type="hidden" name="parse_mode" value="Markdown">
 
-						<ul class="actions">
-							<li><input value="Send Message" type="submit"></li>
-						</ul>
-						
-					</form>
-				</div>
-			</section>
+					<ul class="actions">
+						<li><input value="Send Message" type="submit"></li>
+					</ul>
+				</form>
+			</div>
+		</section>
 
-				<!-- Two -->
-			<section id="one" class="wrapper special">
-				<div class="inner">
-					<header class="major">
-						<h2>About</h2>
-					</header>
-					<div class="features">
-						<div class="feature">
-							<i class="fa fa-diamond"></i>
-							<h3>Markdown</h3>
-							<p>Allows you to write text in bold, italic, hidden the url ...</p>
-						</div>
-						<div class="feature">
-							<i class="fa fa-envelope-o"></i>
-							<h3>Formatting options</h3>
-							<p>*bold text*</p>
-							<p>_italic text_</p>
-							<p>[text](URL)</p>
-							<p>`inline fixed-width code`</p>
-							<p>```pre-formatted fixed-width code block```</p>
-						</div>
-						<div class="feature">
-							<i class="fa fa-paper-plane-o"></i>
-							<h3>Telegram</h3>
-							<p>Telegram currently does not support sending by markdown for user.</p>
-						</div>
+		<section id="one" class="wrapper special">
+			<div class="inner">
+				<header class="major">
+					<h2><a href="https://core.telegram.org/bots/api/#markdown-style">Markdown style</a></h2>
+				</header>
+				<div class="features">
+					<div class="feature">
+						<i class="fa fa-diamond"></i>
+						<h3>Markdown</h3>
+						<p>Allows you to write text in bold, italic, hidden the url...</p>
+					</div>
+					<div class="feature">
+						<i class="fa fa-envelope-o"></i>
+						<h3>Formatting options</h3>
+						<p>*bold text*</p>
+						<p>_italic text_</p>
+						<p>[text](URL)</p>
+						<p>`inline fixed-width code`</p>
+						<p>```pre-formatted fixed-width code block```</p>
+					</div>
+					<div class="feature">
+						<i class="fa fa-paper-plane-o"></i>
+						<h3>Telegram</h3>
+						<p>Telegram currently does not support sending by Markdown for user.</p>
 					</div>
 				</div>
-			</section>
+			</div>
+		</section>
+
+		<br><br><br><br>
+		<br><br><br><br>
+
+
+		<!-- HTML -->
+		<section id="html" class="wrapper style2 special">
+			<div class="inner narrow">
+				<header>
+					<h2>Send Message</h2>
+				</header>
+				<form class="grid-form" action="https://api.telegram.org/bot[[YOU KEY]]/sendMessage" method="post">
+
+					<div class="form-control narrow">
+						<label for="name">Channel</label>
+						<input name="chat_id" value="@Channel" id="name" type="text">
+					</div>
+					<div class="form-control narrow">
+						<label for="email">Formatting options</label>
+						<a href="#one" class="button special">View</a>
+					</div>
+
+					<div class="form-control">
+						<label for="message">Message</label>
+						<textarea name="text" value="*Hi!*" id="message" rows="4"></textarea>
+					</div>
+
+					<input type="hidden" name="isable_web_page_preview" value="true">
+					<input type="hidden" name="parse_mode" value="HTML">
+
+					<ul class="actions">
+						<li><input value="Send Message" type="submit"></li>
+					</ul>
+				</form>
+			</div>
+		</section>
+
+		<section id="one" class="wrapper special">
+			<div class="inner">
+				<header class="major">
+					<h2>HTML style</h2>
+				</header>
+				<div class="features">
+					<div class="feature">
+						<i class="fa fa-diamond"></i>
+						<h3>HTML</h3>
+						<p>Allows you to write text in bold, italic, hidden the url...</p>
+					</div>
+					<div class="feature">
+						<i class="fa fa-envelope-o"></i>
+						<h3>Formatting options</h3>
+						<p>&#60;&#98;&#62;&#98;&#111;&#108;&#100;&#32;&#116;&#101;&#120;&#116;&#60;&#47;&#98;&#62;</p>
+						<p>&#60;&#105;&#62;&#105;&#116;&#97;&#108;&#105;&#99;&#32;&#116;&#101;&#120;&#116;&#60;&#47;&#105;&#62;</p>
+						<p>&#60;&#97;&#32;&#104;&#114;&#101;&#102;&#61;&#34;&#85;&#82;&#76;&#34;&#62;&#116;&#101;&#120;&#116;&#60;&#47;&#97;&#62;</p>
+						<p>&#60;&#99;&#111;&#100;&#101;&#62;&#105;&#110;&#108;&#105;&#110;&#101;&#32;&#102;&#105;&#120;&#101;&#100;&#45;&#119;&#105;&#100;&#116;&#104;&#32;&#99;&#111;&#100;&#101;&#60;&#47;&#99;&#111;&#100;&#101;&#62;</p>
+						<p>&#60;&#112;&#114;&#101;&#62;&#112;&#114;&#101;&#45;&#102;&#111;&#114;&#109;&#97;&#116;&#116;&#101;&#100;&#32;&#102;&#105;&#120;&#101;&#100;&#45;&#119;&#105;&#100;&#116;&#104;&#32;&#99;&#111;&#100;&#101;&#32;&#98;&#108;&#111;&#99;&#107;&#60;&#47;&#112;&#114;&#101;&#62;&#60;&#112;&#114;&#101;&#62;&#112;&#114;&#101;&#45;&#102;&#111;&#114;&#109;&#97;&#116;&#116;&#101;&#100;&#32;&#102;&#105;&#120;&#101;&#100;&#45;&#119;&#105;&#100;&#116;&#104;&#32;&#99;&#111;&#100;&#101;&#32;&#98;&#108;&#111;&#99;&#107;&#60;&#47;&#112;&#114;&#101;&#62;</p>
+					</div>
+					<div class="feature">
+						<i class="fa fa-paper-plane-o"></i>
+						<h3>Telegram</h3>
+						<p>Telegram currently does not support sending by HTML for user.</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<!-- Footer -->
-			<footer id="footer">
-				<div class="copyright">
-					By TiagoDanin. Design: <a href="http://templated.co/">TEMPLATED</a>.
-				</div>
-			</footer>
+		<footer id="footer">
+			<div class="copyright">
+				By TiagoDanin. Design: <a href="http://templated.co/">TEMPLATED</a>.
+			</div>
+		</footer>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
 
 	</body>
 </html>

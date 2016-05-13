@@ -6,15 +6,15 @@
 	 */
 	$.fn.placeholder = function() {
 
-		// Browser natively supports placeholders? Bail.
+			// Browser natively supports placeholders? Bail.
 			if (typeof (document.createElement('input')).placeholder != 'undefined')
 				return $(this);
 
-		// No elements?
+				// No elements?
 			if (this.length == 0)
 				return $this;
 
-		// Multiple elements?
+				// Multiple elements?
 			if (this.length > 1) {
 
 				for (var i=0; i < this.length; i++)
@@ -24,10 +24,10 @@
 
 			}
 
-		// Vars.
+			// Vars.
 			var $this = $(this);
 
-		// Text, TextArea.
+			// Text, TextArea.
 			$this.find('input[type=text],textarea')
 				.each(function() {
 
@@ -67,7 +67,7 @@
 
 				});
 
-		// Password.
+			// Password.
 			$this.find('input[type=password]')
 				.each(function() {
 
@@ -134,7 +134,7 @@
 
 				});
 
-		// Events.
+			// Events.
 			$this
 				.on('submit', function() {
 
@@ -231,55 +231,55 @@
 
 		var key = '__prioritize';
 
-		// Expand $elements if it's not already a jQuery object.
+			// Expand $elements if it's not already a jQuery object.
 			if (typeof $elements != 'jQuery')
 				$elements = $($elements);
 
-		// Step through elements.
+			// Step through elements.
 			$elements.each(function() {
 
 				var	$e = $(this), $p,
 					$parent = $e.parent();
 
-				// No parent? Bail.
+					// No parent? Bail.
 					if ($parent.length == 0)
 						return;
 
-				// Not moved? Move it.
+					// Not moved? Move it.
 					if (!$e.data(key)) {
 
-						// Condition is false? Bail.
+							// Condition is false? Bail.
 							if (!condition)
 								return;
 
-						// Get placeholder (which will serve as our point of reference for when this element needs to move back).
+							// Get placeholder (which will serve as our point of reference for when this element needs to move back).
 							$p = $e.prev();
 
-							// Couldn't find anything? Means this element's already at the top, so bail.
+								// Couldn't find anything? Means this element's already at the top, so bail.
 								if ($p.length == 0)
 									return;
 
-						// Move element to top of parent.
+							// Move element to top of parent.
 							$e.prependTo($parent);
 
-						// Mark element as moved.
+							// Mark element as moved.
 							$e.data(key, $p);
 
 					}
 
-				// Moved already?
+					// Moved already?
 					else {
 
-						// Condition is true? Bail.
+							// Condition is true? Bail.
 							if (condition)
 								return;
 
 						$p = $e.data(key);
 
-						// Move element back to its original location (using our placeholder).
+							// Move element back to its original location (using our placeholder).
 							$e.insertAfter($p);
 
-						// Unmark element as moved.
+							// Unmark element as moved.
 							$e.removeData(key);
 
 					}

@@ -8,7 +8,7 @@ Browser and Internet :v)
 ## Pages
 Run in my [Machine or Bot](https://github.com/TiagoDanin/SendCH-Telegram/wiki/RUN)
 
-Project [WebSite](http://tiagodanin.github.io/SendCH-Telegram/)
+Project [WebSite](http://sendch-tiagoedge.rhcloud.com/)
 
 Suggestions and Support [New Issue](https://github.com/TiagoDanin/SendCH-Telegram/issues/new)
 

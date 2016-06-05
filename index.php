@@ -26,6 +26,9 @@
 			<p>1. Add the bot (@MSGSendBot) for your channel</p>
 			<p>2. Edit and send the message with the form below</p>
 			<p>3. Remove the bot ;)</p>
+			<p>Or use your bot</p>
+			<p>1. Get token in bot @BotFather</p>
+			<p>3. Paste in Very Advanced >> Send with my Bot</p>
 			<ul class="actions">
 				<li><a href="#send" class="button special">Start</a></li>
 			</ul>

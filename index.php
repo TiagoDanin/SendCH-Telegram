@@ -87,7 +87,8 @@
 							$token = ''.$_POST['my_token'].'';
 						}
 						$url_telegram = 'https://api.telegram.org/bot'.$token.'';
-						$url = ''.$url_telegram.'/sendMessage?chat_id='.$_POST['chat_id'].'&text='.$_POST['text'].'';
+						$text = urlencode(''.$_POST['text'].'');
+						$url = ''.$url_telegram.'/sendMessage?chat_id='.$_POST['chat_id'].'&text='.$text.'';
 
 						if(isset($_POST['disable_web_page_preview']))
 						{
@@ -103,7 +104,8 @@
 						}
 						if($_POST['reply_markup'] != '[[{"text":"Open Telegram","url":"https://telegram.org/"}]]')
 						{
-							$url = ''.$url.'&reply_markup={"inline_keyboard":'.$_POST['reply_markup'].'}';
+							$reply_markup = urlencode(''.$_POST['reply_markup'].'');
+							$url = ''.$url.'&reply_markup={"inline_keyboard":'.$reply_markup.'}';
 						}
 						$url_end = ''.$url.'';
 

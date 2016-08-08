@@ -1,12 +1,15 @@
 ## SendCH Telegram
+
+[SendCH-TiagoEDGE.rhcloud.com](http://sendch-tiagoedge.rhcloud.com/)
+
 **Send message for channel (Telegram) using the Markdown or HTML.**
 
 ## Requires for Run
 - Apache2
 
-- Php5
+- Php5 or Php7
 
-- Php5-curl
+- Php5-curl or Php7-curl
 
 
 ## Pages

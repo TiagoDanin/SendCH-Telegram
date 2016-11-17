@@ -18,7 +18,7 @@ Project [WebSite](http://sendch-tiagoedge.rhcloud.com/)
 Suggestions and Support [New Issue](https://github.com/TiagoDanin/SendCH-Telegram/issues/new)
 
 ## Collaborator
-GualterPerinho
+Gualter Perinho
 
 ## LICENSE
 Creative Commons Attribution 3.0 [(CCA)](https://github.com/TiagoDanin/SendCH-Telegram/blob/master/LICENSE)

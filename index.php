@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
 	SendCH-Telegram
-	Version 1.0
+	Version 1.1
 	Created By TiagoDanin
 	Collaborator GualterPerinho
 
@@ -34,6 +34,25 @@
 			</ul>
 		</section>
 
+		<!-- API -->
+		<?php
+			$default_chat_id = '@Channel';
+			$default_message = '';
+			$force_send      = false;
+			if($_GET['chat_id'] and $_GET['chat_id'] != '')
+			{
+				$default_chat_id = $_GET['chat_id'];
+			}
+			if($_GET['message'] and $_GET['message'] != '')
+			{
+				$default_message = $_GET['message'];
+			}
+			if($_GET['force_send'] and $_GET['force_send'] != '' and $_GET['force_send'] != 'false')
+			{
+				$force_send = true;
+			}
+		?>
+
 		<!-- Send Message -->
 		<section id="send" class="wrapper style2 special">
 			<div class="inner narrow">
@@ -44,7 +63,9 @@
 
 					<div class="form-control narrow">
 						<label for="name">Channel</label>
-						<input name="chat_id" value="@Channel" type="text">
+						<?php
+							echo '<input name="chat_id" value="'.$default_chat_id.'" type="text">';
+						?>
 					</div>
 					<div class="form-control narrow">
 						<label for="email">Formatting options</label>
@@ -53,7 +74,9 @@
 
 					<div class="form-control">
 						<label for="message">Message</label>
-						<textarea name="text" value="*Hi!*" id="message" rows="4"></textarea>
+						<?php
+							echo '<textarea name="text" value="" id="message" rows="4">'.$default_message.'</textarea>';
+						?>
 						<select name="parse_mode">
 							<option value="false">Formatting options...</option>
 							<option value="Markdown">Markdown</option>
@@ -71,56 +94,104 @@
 					<div class="form-control">
 						<label for="name">Very Advanced</label>
 						Inline Keybord <input name="reply_markup" value='[[{"text":"Open Telegram","url":"https://telegram.org/"}]]' id="name" type="text">
-						My bot(token) <input name="my_token" value="1234567:ABCD-EDFGH" type="text">
+						Send with my Bot(token) <input name="my_token" value="1234567:ABCD-EDFGH" type="text">
 					</div>
 
 					<ul class="actions">
 						<li><input value="Send Message" type="submit" name="sendButton"></li>
 					</ul>
 				</form>
+
+				<!-- Send to Telegram -->
 				<?php
-					if(isset($_POST['sendButton']))
+					if($force_send == true)
 					{
-						$token = ''; //HERE TOKEN
-						if($_POST['my_token'] != '1234567:ABCD-EDFGH')
-						{
-							$token = ''.$_POST['my_token'].'';
-						}
-						$url_telegram = 'https://api.telegram.org/bot'.$token.'';
-						$text = urlencode(''.$_POST['text'].'');
-						$url = ''.$url_telegram.'/sendMessage?chat_id='.$_POST['chat_id'].'&text='.$text.'';
+						$_POST['chat_id']                  = $default_chat_id;
+						$_POST['text']                     = $default_message;
+						$_POST['my_token']                 = '1234567:ABCD-EDFGH';
+						$_POST['disable_web_page_preview'] = '';
+						$_POST['disable_notification']     = '';
+						$_POST['parse_mode']               = 'false';
+						$_POST['reply_markup']             = '[[{"text":"Open Telegram","url":"https://telegram.org/"}]]';
+					}
+					if(isset($_POST['sendButton']) OR $force_send == true)
+					{
+						error_reporting(E_ALL & ~E_NOTICE);
+						$telegram                  = 'https://api.telegram.org/bot';
+						$token                     = ''; //HERE TOKEN
+						$custom_token              = $_POST['my_token'];
 
-						if(isset($_POST['disable_web_page_preview']))
-						{
-							$url = ''.$url.'&disable_web_page_preview='.$_POST['disable_web_page_preview'].'';
-						}
-						if(isset($_POST['disable_notification']))
-						{
-							$url = ''.$url.'&disable_notification='.$_POST['disable_notification'].'';
-						}
-						if($_POST['parse_mode'] != 'false')
-						{
-							$url = ''.$url.'&parse_mode='.$_POST['parse_mode'].'';
-						}
-						if($_POST['reply_markup'] != '[[{"text":"Open Telegram","url":"https://telegram.org/"}]]')
-						{
-							$reply_markup = urlencode(''.$_POST['reply_markup'].'');
-							$url = ''.$url.'&reply_markup={"inline_keyboard":'.$reply_markup.'}';
-						}
-						$url_end = ''.$url.'';
+						$chat_id                   = $_POST['chat_id'];
+						$message                   = $_POST['text'];
 
+						$disable_web_page_preview  = $_POST['disable_web_page_preview'];
+						$disable_notification      = $_POST['disable_notification'];
+						$parse_mode                = $_POST['parse_mode'];
+						$reply_markup              = $_POST['reply_markup'];
+
+						// ERROR //
+						if(empty($token) OR $token == '')
+						{
+							$error[0] = "Missing a token!";
+						}
+						if(empty($chat_id) OR $chat_id == '@Channel')
+						{
+							$error[1] = "Missing the chat id!";
+						}
+						if(empty($message) OR $message == '')
+						{
+							$error[2] = "Missing the message!";
+						}
+
+						// Telegram API //
+						if($custom_token != '1234567:ABCD-EDFGH')
+						{
+							$token = ''.$custom_token.'';
+						}
+						$api_telegram = ''.$telegram.''.$token.'';
+
+						$message_text = urlencode(''.$message.'');
+						$url = ''.$api_telegram.'/sendMessage?chat_id='.$chat_id.'&text='.$message_text.'';
+
+						if(isset($disable_web_page_preview))
+						{
+							$url = ''.$url.'&disable_web_page_preview='.$disable_web_page_preview.'';
+						}
+						if(isset($disable_notification))
+						{
+							$url = ''.$url.'&disable_notification='.$disable_notification.'';
+						}
+						if($parse_mode != 'false')
+						{
+							$url = ''.$url.'&parse_mode='.$parse_mode.'';
+						}
+						if($reply_markup != '[[{"text":"Open Telegram","url":"https://telegram.org/"}]]')
+						{
+							$reply_markup_txt = urlencode(''.$reply_markup.'');
+							$url = ''.$url.'&reply_markup={"inline_keyboard":'.$reply_markup_txt.'}';
+						}
+
+						// Send Request //
 						$ch = curl_init();
-						curl_setopt($ch, CURLOPT_URL, $url_end);
+						curl_setopt($ch, CURLOPT_URL, $url);
 						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 						$output = curl_exec($ch);
 						curl_close($ch);
 						$res = substr($output, 0, 11);
 						if($res == '{"ok":false')
 						{
-							echo 'Error sending!';
+							$error[3] = 'Error sending!';
+							if(count($error)>0)
+							{
+								foreach($error as $line)
+								{
+									echo '<p>'.$line.'</p>';
+								}
+							}
 						} else {
 							echo 'Message sent with successfully!';
 						};
+
 					}
 				?>
 			</div>
@@ -168,7 +239,7 @@
 		<!-- Footer -->
 		<footer id="footer">
 			<div class="copyright">
-				By: <a href="https://github.com/TiagoDanin/">TiagoDanin</a> Design: <a href="http://templated.co/">TEMPLATED</a> Github: <a href="https://github.com/TiagoDanin/SendCH-Telegram/">SendCH-Telegram</a>
+				By <a href="https://github.com/TiagoDanin/">TiagoDanin</a> and Gualter Perinho Design: <a href="http://templated.co/">TEMPLATED</a> Github: <a href="https://github.com/TiagoDanin/SendCH-Telegram/">SendCH-Telegram</a>
 			</div>
 		</footer>
 
